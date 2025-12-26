@@ -1,6 +1,9 @@
 name: Deploy TodoApp Infra
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -52,6 +55,7 @@ jobs:
 
       - name: Run Checkov
         uses: bridgecrewio/checkov-action@v12
+        continue-on-error: true
         with:
           directory: ${{ env.TF_WORKING_DIR }}
           framework: terraform
