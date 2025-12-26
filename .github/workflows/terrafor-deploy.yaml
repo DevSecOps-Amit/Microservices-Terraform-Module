@@ -23,6 +23,19 @@ jobs:
           
       - name: Who am I
         run: az account show
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.50.3
+
+      - name: Init TFLint
+        run: tflint --init
+        working-directory: todoapp-tf
+
+      - name: Run TFLint
+        run: tflint -f compact
+        working-directory: todoapp-tf
       
 
       - name: Setup Terraform
